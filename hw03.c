@@ -9,6 +9,8 @@ typedef enum {
 typedef struct {
   char *first_name;
   char *last_name;
+  char *major;
+  int year;
   // TODO: add fields here for major and year
 } Student;
 
@@ -17,6 +19,14 @@ void print_student(Mode m, Student s) {
     case NAME_ONLY:
       printf("%s %s\n", s.first_name, s.last_name);
       break;
+	case MAJOR_AND_NAME:
+	  printf("%s %s %s\n", s.major, s.first_name, s.last_name);
+	  break;
+	case YEAR_AND_NAME:
+	  printf("%i %s %s\n", s.year, s.first_name, s.last_name);
+	  break;
+	  
+	
   // TODO: handle other cases
   }
 }
