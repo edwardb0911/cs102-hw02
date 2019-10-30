@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef enum {
   NAME_ONLY = 0,
@@ -11,7 +12,6 @@ typedef struct {
   char *last_name;
   char *major;
   int year;
-  // TODO: add fields here for major and year
 } Student;
 
 void print_student(Mode m, Student s) {
@@ -23,11 +23,9 @@ void print_student(Mode m, Student s) {
 	  printf("%s %s %s\n", s.major, s.first_name, s.last_name);
 	  break;
 	case YEAR_AND_NAME:
-	  printf("%i %s %s\n", s.year, s.first_name, s.last_name);
+	  printf("%d %s %s\n", s.year, s.first_name, s.last_name);
 	  break;
 	  
-	
-  // TODO: handle other cases
   }
 }
 
@@ -39,15 +37,22 @@ You will need to check argc to determine the number of students passed at runtim
 The fields are all strings (char[]), except year is a number (int)
 */
 int main(int argc, char **argv) {
+	int groups = argc % 4;
+	int counter = 0;
+	while (counter < groups){
+		int initial = 4 * counter;
+		Student s;
+		s.first_name = argv[initial + 2];
+		// printf("%s \n", s.first_name); test for name being present
+		s.last_name = argv[initial + 3];
+		s.major = argv[initial + 4];
+		s.year = atoi(argv[initial + 5]);
+		print_student(atoi(argv[1]), s);
+		counter = counter + 1;
+		//printf("oneloop \n"); // debug statement for end of loop
+	}
   // TODO: parse argv to populate student structs 
   // for now, here's two hardcoded students:
-  Student s1, s2;
-  s1.first_name = "Julia";
-  s1.last_name = "A";
-  s2.first_name = "Peter";
-  s2.last_name = "Cooper";
   
-  print_student(NAME_ONLY, s1);
-  print_student(NAME_ONLY, s2);
   return 0;
 }
